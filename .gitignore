@@ -5,6 +5,12 @@
 *.so
 *.dylib
 
+# Mac specific indexes
+.DS_Store
+
+# VSCode folder
+.vscode/
+
 # Test binary, built with `go test -c`
 *.test
 
