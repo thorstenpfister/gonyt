@@ -1,0 +1,6 @@
+@api_key=
+@base_url=https://api.nytimes.com/svc
+
+### Fetch top stories by section
+@top_stories_section=arts
+GET {{base_url}}/topstories/v2/{{top_stories_section}}.json?api-key={{api_key}}
