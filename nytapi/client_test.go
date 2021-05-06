@@ -82,7 +82,7 @@ func Test_Client_ShouldHandleValid_FetchTopStories_WithValues(t *testing.T) {
 	sut := nytapi.NewClient(&mockedHTTPClient, apiKey)
 
 	ctx := context.Background()
-	section := nytapi.TopStoriesSection("arts")
+	section := nytapi.Arts
 	articles, updateTime, err := sut.FetchTopStories(ctx, section)
 
 	require.Nil(t, err)
@@ -100,7 +100,7 @@ func Test_Client_ShouldHandleInvalid_FetchTopStories_WithError(t *testing.T) {
 	sut := nytapi.NewClient(&mockedHTTPClient, apiKey)
 
 	ctx := context.Background()
-	section := nytapi.TopStoriesSection("arts")
+	section := nytapi.Arts
 	articles, updateTime, err := sut.FetchTopStories(ctx, section)
 
 	require.Nil(t, articles)
