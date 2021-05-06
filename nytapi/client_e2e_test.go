@@ -40,7 +40,7 @@ func (suite *ClientE2ETestSuite) Test_E2E_Client_ShouldHandleValid_FetchTopStori
 	sut := nytapi.NewClient(&suite.httpClient, suite.apiKey)
 
 	ctx := context.Background()
-	section := nytapi.TopStoriesSection("arts")
+	section := nytapi.Arts
 
 	articles, updateTime, err := sut.FetchTopStories(ctx, section)
 
