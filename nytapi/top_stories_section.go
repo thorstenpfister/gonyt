@@ -38,5 +38,5 @@ func (section TopStoriesSection) IsValid() error {
 	case Arts, Automobiles, Books, Business, Fashion, Food, Health, Home, Insider, Magazine, Movies, Nyregion, Obituaries, Opinion, Politics, Realestate, Science, Sports, Sundayreview, Technology, Theater, Tmagazine, Travel, Upshot, Us, World:
 		return nil
 	}
-	return fmt.Errorf("Invalid 'Top Stories' section: %v", section)
+	return fmt.Errorf("invalid 'Top Stories' section: %v", section)
 }
