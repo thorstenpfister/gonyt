@@ -14,7 +14,7 @@ import (
 	"github.com/thorstenpfister/gonyt/nytapi"
 )
 
-func Test_Client_ShouldHandleValid_FetchRequest_WithValues(t *testing.T) {
+func Test_Client_ShouldHandleValid_FetchTopStories_WithValues(t *testing.T) {
 	json := `{
 				"status": "OK",
 				"copyright": "Copyright (c) 2021 The New York Times Company. All Rights Reserved.",
@@ -90,7 +90,7 @@ func Test_Client_ShouldHandleValid_FetchRequest_WithValues(t *testing.T) {
 	assert.NotNil(t, updateTime)
 }
 
-func Test_Client_ShouldHandleInvalid_FetchRequest_WithError(t *testing.T) {
+func Test_Client_ShouldHandleInvalid_FetchTopStories_WithError(t *testing.T) {
 	mockedHTTPClient := port.MockedHTTPClient{
 		DoFunc: func(*http.Request) (*http.Response, error) {
 			return &http.Response{StatusCode: 404}, nil
@@ -110,7 +110,7 @@ func Test_Client_ShouldHandleInvalid_FetchRequest_WithError(t *testing.T) {
 	}
 }
 
-func Test_Client_ShouldHandleInvalidTopStoriesSection_FetchRequest_withError(t *testing.T) {
+func Test_Client_ShouldHandleInvalidTopStoriesSection_FetchTopStories_withError(t *testing.T) {
 	mockedHTTPClient := port.MockedHTTPClient{
 		DoFunc: func(*http.Request) (*http.Response, error) {
 			return &http.Response{StatusCode: 404}, nil
