@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/thorstenpfister/gonyt/internal/nytapi"
+	"github.com/thorstenpfister/gonyt/nytapi"
 )
 
 func Test_TopStoriesSection_ShouldBeReflectingSection_WithValue(t *testing.T) {

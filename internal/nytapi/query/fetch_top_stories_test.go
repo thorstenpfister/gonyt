@@ -9,7 +9,6 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"github.com/thorstenpfister/gonyt/internal/nytapi"
 	"github.com/thorstenpfister/gonyt/internal/nytapi/apierror"
 	"github.com/thorstenpfister/gonyt/internal/nytapi/port"
 	"github.com/thorstenpfister/gonyt/internal/nytapi/query"
@@ -75,7 +74,7 @@ func Test_FetchTopStoriesHandler_HandlesSuccessResponseWithBody_WithValue(t *tes
 	body := ioutil.NopCloser(bytes.NewReader([]byte(json)))
 
 	fetchTopStories := query.FetchTopStories{
-		Section: nytapi.Arts,
+		Section: "arts",
 	}
 	mockedHTTPClient := port.MockedHTTPClient{
 		DoFunc: func(*http.Request) (*http.Response, error) {
@@ -105,7 +104,7 @@ func Test_FetchTopStoriesHandler_HandlesSuccessResponseWithInvalidBody_WithError
 	body := ioutil.NopCloser(bytes.NewReader([]byte(json)))
 
 	fetchTopStories := query.FetchTopStories{
-		Section: nytapi.Arts,
+		Section: "arts",
 	}
 	mockedHTTPClient := port.MockedHTTPClient{
 		DoFunc: func(*http.Request) (*http.Response, error) {
@@ -131,7 +130,7 @@ func Test_FetchTopStoriesHandler_HandlesSuccessResponseWithInvalidBody_WithError
 }
 func Test_FetchTopStoriesHandler_HandlesSuccessResponseWithoutBody_WithError(t *testing.T) {
 	fetchTopStories := query.FetchTopStories{
-		Section: nytapi.Arts,
+		Section: "arts",
 	}
 	mockedHTTPClient := port.MockedHTTPClient{
 		DoFunc: func(*http.Request) (*http.Response, error) {
@@ -158,7 +157,7 @@ func Test_FetchTopStoriesHandler_HandlesSuccessResponseWithoutBody_WithError(t *
 
 func Test_FetchTopStoriesHandler_HandlesFailureResponse_WithError(t *testing.T) {
 	fetchTopStories := query.FetchTopStories{
-		Section: nytapi.Arts,
+		Section: "arts",
 	}
 	mockedHTTPClient := port.MockedHTTPClient{
 		DoFunc: func(*http.Request) (*http.Response, error) {
@@ -191,7 +190,7 @@ func Test_FetchTopStoriesHandler_HandlesFailureResponseBody_WithError(t *testing
 	body := ioutil.NopCloser(bytes.NewReader([]byte(json)))
 
 	fetchTopStories := query.FetchTopStories{
-		Section: nytapi.Arts,
+		Section: "arts",
 	}
 	mockedHTTPClient := port.MockedHTTPClient{
 		DoFunc: func(*http.Request) (*http.Response, error) {

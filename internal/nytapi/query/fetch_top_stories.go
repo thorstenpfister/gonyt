@@ -13,7 +13,7 @@ import (
 )
 
 type FetchTopStories struct {
-	Section nytapi.TopStoriesSection
+	Section string
 }
 
 type FetchTopStoriesHandler struct {

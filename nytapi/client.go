@@ -10,7 +10,6 @@ import (
 )
 
 type Article = nytapi.Article
-type TopStoriesSection = nytapi.TopStoriesSection
 
 type Client struct {
 	port port.HTTPPort
@@ -33,7 +32,7 @@ func (c *Client) FetchTopStories(ctx context.Context, section TopStoriesSection)
 	}
 
 	fetchTopStories := query.FetchTopStories{
-		Section: section,
+		Section: string(section),
 	}
 	handler := query.FetchTopStoriesHandler{
 		Query: fetchTopStories,
