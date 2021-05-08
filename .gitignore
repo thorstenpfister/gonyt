@@ -14,6 +14,9 @@
 # Test binary, built with `go test -c`
 *.test
 
+# Binary on local build
+gonyt
+
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
 
