@@ -64,4 +64,4 @@ Feel free to fork and pose a PR. Please note the present structure loosely align
 
 # License
 
-`gonyt` is release under the 3-clause BSD License. See [LICENSE](https://github.com/thorstenpfister/gonyt/blob/main/LICENSE).
+`gonyt` is released under the 3-clause BSD License. See [LICENSE](https://github.com/thorstenpfister/gonyt/blob/main/LICENSE).
