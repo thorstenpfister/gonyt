@@ -48,7 +48,7 @@ func (h *FetchTopStoriesHandler) newFetchTopStoriesHTTPRequest(ctx context.Conte
 
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
 	if err != nil {
-		return nil, fmt.Errorf("Failed to create HTTP request for GET FetchTopStoriesRequest with error: %v", err)
+		return nil, fmt.Errorf("failed to create HTTP request for GET FetchTopStoriesRequest with error: %v", err)
 	}
 
 	return req, nil
@@ -65,19 +65,19 @@ type fetchTopStoriesAPIResponse struct {
 
 func newFetchTopStoriesAPIResponse(res *http.Response) (*fetchTopStoriesAPIResponse, error) {
 	if res.Body == nil {
-		return nil, fmt.Errorf("No FetchTopStoriesAPIResponse given.")
+		return nil, fmt.Errorf("no FetchTopStoriesAPIResponse given.")
 	}
 
 	defer res.Body.Close()
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
-		return nil, fmt.Errorf("Failed to read body of response with error: %v", err)
+		return nil, fmt.Errorf("failed to read body of response with error: %v", err)
 	}
 
 	var response = new(fetchTopStoriesAPIResponse)
 	err = json.Unmarshal(body, &response)
 	if err != nil {
-		return nil, fmt.Errorf("Unmarshaling the request body json into an FetchAccountResponse failed with error: %v", err)
+		return nil, fmt.Errorf("unmarshaling the request body json into an FetchAccountResponse failed with error: %v", err)
 	}
 
 	return response, nil
