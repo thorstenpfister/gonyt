@@ -1,6 +1,6 @@
 [![GitHub license](https://img.shields.io/github/license/thorstenpfister/gonyt)](https://github.com/thorstenpfister/gonyt/blob/main/LICENSE)
 [![GitHub release](https://img.shields.io/github/release/thorstenpfister/gonyt)](https://github.com/thorstenpfister/gonyt/releases)
-[![GoReportCard example](https://goreportcard.com/badge/github.com/thorstenpfister/gonyt)](https://goreportcard.com/report/github.com/thorstenpfister/gonyt)
+[![Go Report Card](https://goreportcard.com/badge/github.com/thorstenpfister/gonyt)](https://goreportcard.com/report/github.com/thorstenpfister/gonyt)
 
 # Disclaimer
 
