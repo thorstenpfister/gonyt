@@ -142,7 +142,7 @@ func (err APIError) baseMessage() string {
 	case TooManyRequestsError:
 		return "Too many requests. Rate limit for requests per second has been exceeded, please back-off immediately, then retry later."
 	case ServerError:
-		return "Server error. Internal error occured or the request timed out. This is safe to retry after waiting a short amount of time."
+		return "Server error. Internal error occurred or the request timed out. This is safe to retry after waiting a short amount of time."
 	case BadGatewayError:
 		return "Bad Gateway. Temporary internal networking problem. This is safe to retry after waiting a short amount of time."
 	case ServiceUnavailableError:
