@@ -3,8 +3,6 @@ package cmd
 import (
 	"context"
 	"fmt"
-	"net/http"
-	"time"
 
 	"github.com/spf13/cobra"
 	"github.com/thorstenpfister/gonyt/nytapi"
@@ -28,23 +26,13 @@ var topstoriesCmd = &cobra.Command{
 		gonyt topstories -s opinion		
 		gonyt topstories -s magazine`,
 	Run: func(cmd *cobra.Command, args []string) {
-		section := nytapi.TopStoriesSection(Section)
-
-		apiKey, err := preferredApiKey()
+		client, err := newCLIClient()
 		if err != nil {
 			fmt.Println("Error calling New York Times API!", err)
 			return
 		}
-		if FlagVerbose {
-			fmt.Println("Using api key:", apiKey)
-		}
-
-		httpClient := http.Client{
-			Timeout: 15 * time.Second,
-		}
-
-		client := nytapi.NewClient(&httpClient, *apiKey)
 		ctx := context.Background()
+		section := nytapi.TopStoriesSection(Section)
 
 		articles, updateTime, err := client.FetchTopStories(ctx, section)
 		if err != nil {
@@ -52,15 +40,7 @@ var topstoriesCmd = &cobra.Command{
 			return
 		}
 
-		if FlagJSONOutput {
-			err = printJSON(articles)
-			if err != nil {
-				fmt.Println("Error printing JSON!", err)
-				return
-			}
-		} else {
-			printTopstories(articles, updateTime)
-		}
+		print(articles, updateTime)
 	},
 }
 
@@ -69,17 +49,4 @@ func init() {
 
 	topstoriesCmd.Flags().StringVarP(&Section, "section", "s", "", "Top stories section to be fetched.")
 	topstoriesCmd.MarkFlagRequired("section")
-}
-
-func printTopstories(articles *[]nytapi.Article, updateTime *time.Time) {
-	fmt.Println("Last update:", updateTime)
-	fmt.Println()
-
-	for _, article := range *articles {
-		fmt.Println(article.Title)
-		if article.Abstract != "" {
-			fmt.Println("\t", article.Abstract)
-		}
-		fmt.Println("\t", article.Url)
-	}
 }
