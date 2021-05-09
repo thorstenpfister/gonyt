@@ -12,15 +12,18 @@ import (
 	"github.com/thorstenpfister/gonyt/internal/nytapi/port"
 )
 
+// FetchTopStories models a query for fetching 'Top stories' of a specified section of the New York Times API.
 type FetchTopStories struct {
 	Section string
 }
 
+// FetchTopStoriesHandler is used to handle a FetchTopStories query.
 type FetchTopStoriesHandler struct {
 	Query FetchTopStories
 	Port  port.HTTPPort
 }
 
+// Handle handles the query for a 'Top stories' section from the New York Times API.
 func (h *FetchTopStoriesHandler) Handle(ctx context.Context) (*[]nytapi.Article, *time.Time, error) {
 	req, err := h.newFetchTopStoriesHTTPRequest(ctx)
 	if err != nil {

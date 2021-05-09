@@ -2,7 +2,7 @@ package nytapi
 
 import "time"
 
-// An article as delivered by the New York Times API.
+// Article as delivered by the New York Times API.
 type Article struct {
 	Section           string       `json:"section,omitempty"`
 	Subsection        string       `json:"subsection,omitempty"`
@@ -25,7 +25,7 @@ type Article struct {
 	ShortUrl          string       `json:"short_url,omitempty"`
 }
 
-// A multimedia asset belonging to an article from the New York Times API.
+// Multimedia asset belonging to an article from the New York Times API.
 type Multimedia struct {
 	Url       string `json:"url,omitempty"`
 	Format    string `json:"format,omitempty"`

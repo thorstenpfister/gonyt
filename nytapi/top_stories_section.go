@@ -2,7 +2,7 @@ package nytapi
 
 import "fmt"
 
-// Top stories as defined in the New York Times API.
+// TopStoriesSection as defined in the New York Times API.
 type TopStoriesSection string
 
 // Valid 'Top stories' section as defined by the New York Times API.
@@ -35,7 +35,7 @@ const (
 	World        TopStoriesSection = "world"
 )
 
-// Checks the validity of a 'Top stories' section.
+// IsValid checks the validity of a 'Top stories' section.
 func (section TopStoriesSection) IsValid() error {
 	switch section {
 	case Arts, Automobiles, Books, Business, Fashion, Food, Health, Home, Insider, Magazine, Movies, Nyregion, Obituaries, Opinion, Politics, Realestate, Science, Sports, Sundayreview, Technology, Theater, Tmagazine, Travel, Upshot, Us, World:
