@@ -51,7 +51,7 @@ func (h *FetchTopStoriesHandler) newFetchTopStoriesHTTPRequest(ctx context.Conte
 	return req, nil
 }
 
-type FetchTopStoriesAPIResponse struct {
+type fetchTopStoriesAPIResponse struct {
 	Status      string           `json:"status,omitempty"`
 	Copyright   string           `json:"copyright,omitempty"`
 	Section     string           `json:"section,omitempty"`
@@ -60,7 +60,7 @@ type FetchTopStoriesAPIResponse struct {
 	Results     []nytapi.Article `json:"results,omitempty"`
 }
 
-func newFetchTopStoriesAPIResponse(res *http.Response) (*FetchTopStoriesAPIResponse, error) {
+func newFetchTopStoriesAPIResponse(res *http.Response) (*fetchTopStoriesAPIResponse, error) {
 	if res.Body == nil {
 		return nil, fmt.Errorf("No FetchTopStoriesAPIResponse given.")
 	}
@@ -71,7 +71,7 @@ func newFetchTopStoriesAPIResponse(res *http.Response) (*FetchTopStoriesAPIRespo
 		return nil, fmt.Errorf("Failed to read body of response with error: %v", err)
 	}
 
-	var response = new(FetchTopStoriesAPIResponse)
+	var response = new(fetchTopStoriesAPIResponse)
 	err = json.Unmarshal(body, &response)
 	if err != nil {
 		return nil, fmt.Errorf("Unmarshaling the request body json into an FetchAccountResponse failed with error: %v", err)

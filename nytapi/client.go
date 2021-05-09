@@ -9,12 +9,15 @@ import (
 	"github.com/thorstenpfister/gonyt/internal/nytapi/query"
 )
 
+// An article as delivered by the New York Times API.
 type Article = nytapi.Article
 
+// A Client for querying the New York Times API.
 type Client struct {
 	port port.HTTPPort
 }
 
+// Create a new client for querying the New York Times API, providing your own HTTP client and API key.
 func NewClient(httpClient port.HTTPClient, apiKey string) Client {
 	client := Client{
 		port: port.HTTPPort{
@@ -26,6 +29,7 @@ func NewClient(httpClient port.HTTPClient, apiKey string) Client {
 	return client
 }
 
+// Fetch the 'Top stories' from the New York Times API.
 func (c *Client) FetchTopStories(ctx context.Context, section TopStoriesSection) (*[]Article, *time.Time, error) {
 	if err := section.IsValid(); err != nil {
 		return nil, nil, err

@@ -8,7 +8,7 @@ import (
 	"github.com/thorstenpfister/gonyt/nytapi"
 )
 
-var Section string
+var section string
 
 var topstoriesCmd = &cobra.Command{
 	Use:   "topstories",
@@ -32,7 +32,7 @@ var topstoriesCmd = &cobra.Command{
 			return
 		}
 		ctx := context.Background()
-		section := nytapi.TopStoriesSection(Section)
+		section := nytapi.TopStoriesSection(section)
 
 		articles, updateTime, err := client.FetchTopStories(ctx, section)
 		if err != nil {
@@ -47,6 +47,6 @@ var topstoriesCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(topstoriesCmd)
 
-	topstoriesCmd.Flags().StringVarP(&Section, "section", "s", "", "Top stories section to be fetched.")
+	topstoriesCmd.Flags().StringVarP(&section, "section", "s", "", "Top stories section to be fetched.")
 	topstoriesCmd.MarkFlagRequired("section")
 }
