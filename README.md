@@ -44,7 +44,7 @@ then include in your application via
 import "github.com/thorstenpfister/gonyt/nytapi"
 ```
 
-To build the CLI application feel free to 
+To build the CLI application, clone the repo and feel free to 
 ```bash
 go build
 ```
