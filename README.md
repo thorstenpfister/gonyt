@@ -1,6 +1,6 @@
 [![GitHub license](https://img.shields.io/badge/license-BSD%203--clause-brightgreen)](https://github.com/thorstenpfister/gonyt/blob/main/LICENSE)
 [![GitHub release](https://img.shields.io/github/release/thorstenpfister/gonyt)](https://github.com/thorstenpfister/gonyt/releases)
-[![Go Report Card](https://goreportcard.com/badge/github.com/thorstenpfister/gonyt)](https://goreportcard.com/report/github.com/thorstenpfister/gonyt)
+[![Go Report card](https://goreportcard.com/badge/github.com/thorstenpfister/gonyt?style=plastic)](https://goreportcard.com/report/github.com/thorstenpfister/gonyt)
 
 # Disclaimer
 
@@ -46,7 +46,7 @@ then include in your application via
 import "github.com/thorstenpfister/gonyt/nytapi"
 ```
 
-To build the CLI application feel free to 
+To build the CLI application, clone the repo and feel free to 
 ```bash
 go build
 ```
