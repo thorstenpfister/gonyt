@@ -48,3 +48,24 @@ func (suite *ClientE2ETestSuite) Test_E2E_Client_ShouldHandleValid_FetchTopStori
 	assert.NotNil(suite.T(), articles)
 	assert.NotNil(suite.T(), updateTime)
 }
+
+func (suite *ClientE2ETestSuite) Test_E2E_Client_ShouldHandleValid_FetchBookReviews_WithValues() {
+	var cases = []struct {
+		category   nytapi.BookReviewsCategory
+		searchTerm string
+	}{
+		{nytapi.Author, "Michelle Obama"},
+		{nytapi.Isbn, "9781524763138"},
+		{nytapi.Title, "Becoming"},
+	}
+
+	ctx := context.Background()
+	sut := nytapi.NewClient(&suite.httpClient, suite.apiKey)
+
+	for _, tt := range cases {
+		bookReviews, err := sut.FetchBookReviews(ctx, tt.category, tt.searchTerm)
+
+		require.Nil(suite.T(), err)
+		assert.NotNil(suite.T(), bookReviews)
+	}
+}

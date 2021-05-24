@@ -12,6 +12,9 @@ import (
 // Article as delivered by the New York Times API.
 type Article = nytapi.Article
 
+// BookReview as delivered by the New York Times API.
+type BookReview = nytapi.BookReview
+
 // Client for querying the New York Times API.
 type Client struct {
 	port port.HTTPPort
@@ -49,4 +52,27 @@ func (c *Client) FetchTopStories(ctx context.Context, section TopStoriesSection)
 	}
 
 	return articles, lastUpdated, nil
+}
+
+// FetchBookReviews is used to fetch book reviews from the New York Times API.
+func (c *Client) FetchBookReviews(ctx context.Context, category BookReviewsCategory, searchTerm string) (*[]BookReview, error) {
+	if err := category.IsValid(); err != nil {
+		return nil, err
+	}
+
+	fetchBookReviews := query.FetchBookReviews{
+		Category: string(category),
+		Term:     searchTerm,
+	}
+	handler := query.FetchBookReviewsHandler{
+		Query: fetchBookReviews,
+		Port:  c.port,
+	}
+
+	bookReviews, err := handler.Handle(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	return bookReviews, nil
 }

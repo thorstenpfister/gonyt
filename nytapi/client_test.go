@@ -127,3 +127,81 @@ func Test_Client_ShouldHandleInvalidTopStoriesSection_FetchTopStories_withError(
 	require.Nil(t, updateTime)
 	assert.NotNil(t, err)
 }
+
+func Test_Client_ShouldHandleValid_FetchBookReviews_WithValues(t *testing.T) {
+	json := `{
+				"status": "OK",
+				"copyright": "Copyright (c) 2021 The New York Times Company.  All Rights Reserved.",
+				"num_results": 1,
+				"results": [
+					{
+					"url": "https:\/\/www.nytimes.com\/2018\/12\/06\/books\/review\/michelle-obama-becoming-memoir.html",
+					"publication_dt": "2018-12-06",
+					"byline": "Isabel Wilkerson",
+					"book_title": "Becoming",
+					"book_author": "Michelle Obama",
+					"summary": "The former first lady\u2019s long-awaited new memoir recounts with insight, candor and wit her family\u2019s trajectory from the Jim Crow South to Chicago\u2019s South Side and her own improbable journey from there to the White House.",
+					"uuid": "00000000-0000-0000-0000-000000000000",
+					"uri": "nyt:\/\/book\/00000000-0000-0000-0000-000000000000",
+					"isbn13": [
+						"9781524763138"
+					]
+					}
+				]
+			}`
+	body := ioutil.NopCloser(bytes.NewReader([]byte(json)))
+
+	mockedHTTPClient := port.MockedHTTPClient{
+		DoFunc: func(*http.Request) (*http.Response, error) {
+			return &http.Response{StatusCode: 200, Body: body}, nil
+		},
+	}
+	apiKey := "mockedApiKey"
+	sut := nytapi.NewClient(&mockedHTTPClient, apiKey)
+
+	ctx := context.Background()
+	category := nytapi.Author
+	term := "Michelle Obama"
+	bookReviews, err := sut.FetchBookReviews(ctx, category, term)
+
+	require.Nil(t, err)
+	assert.NotNil(t, bookReviews)
+}
+
+func Test_Client_ShouldHandleInvalid_FetchBookReviews_WithError(t *testing.T) {
+	mockedHTTPClient := port.MockedHTTPClient{
+		DoFunc: func(*http.Request) (*http.Response, error) {
+			return &http.Response{StatusCode: 404}, nil
+		},
+	}
+	apiKey := "mockedApiKey"
+	sut := nytapi.NewClient(&mockedHTTPClient, apiKey)
+
+	ctx := context.Background()
+	category := nytapi.Author
+	term := "Michelle Obama"
+	bookReviews, err := sut.FetchBookReviews(ctx, category, term)
+
+	require.Nil(t, bookReviews)
+	if assert.NotNil(t, err) {
+		assert.IsType(t, apierror.APIError{}, err)
+	}
+}
+
+func Test_Client_ShouldHandleInvalidBookReviewsCategory_FetchBookReviews_withError(t *testing.T) {
+	mockedHTTPClient := port.MockedHTTPClient{
+		DoFunc: func(*http.Request) (*http.Response, error) {
+			return &http.Response{StatusCode: 404}, nil
+		},
+	}
+	apiKey := "mockedApiKey"
+	sut := nytapi.NewClient(&mockedHTTPClient, apiKey)
+
+	ctx := context.Background()
+	category := nytapi.BookReviewsCategory("This is not a valid section")
+	term := "Michelle Obama"
+	bookReviews, err := sut.FetchBookReviews(ctx, category, term)
+
+	require.Nil(t, bookReviews)
+	assert.NotNil(t, err)
+}

@@ -4,3 +4,13 @@
 ### Fetch top stories by section
 @top_stories_section=arts
 GET {{base_url}}/topstories/v2/{{top_stories_section}}.json?api-key={{api_key}}
+
+### Fetch book reviews 
+@search_category=author 
+@search_term=Michelle+Obama
+https://api.nytimes.com/svc/books/v3/reviews.json?{{search_category}}={{search_term}}&api-key={{api_key}}
+
+
+### Fetch list of book reviews
+@list_category=hardcover-fiction
+https://api.nytimes.com/svc/books/v3/lists/current/{{list_category}}.json?api-key={{api_key}}
