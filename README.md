@@ -21,9 +21,11 @@ The CLI tool also acts as an example for the usage of the library.
 The following APIs are currently implemented in both the library and CLI. Other available APIs are listed in alphabetical order and may or may not be implemented at a later date.
 
  - [x] Top stories
+ - [x] Books
+   - [x] Book reviews
+   - [ ] Bestseller lists
  - [ ] Archive
  - [ ] Article search
- - [ ] Books
  - [ ] Community
  - [ ] Most popular
  - [ ] Movie reviews
@@ -61,6 +63,8 @@ Play around with Go, provide a solid & thought out library, get a fun CLI tool i
 # Contributing
 
 Feel free to fork and pose a PR. Please note the present structure loosely aligned to CQRS principles and that the library aims for a test coverage of 80%+.
+
+Please note that any CLI output must contain the link to the relevant New York Times resource as per their licensing agreement.
 
 # License
 
