@@ -65,7 +65,7 @@ type fetchTopStoriesAPIResponse struct {
 
 func newFetchTopStoriesAPIResponse(res *http.Response) (*fetchTopStoriesAPIResponse, error) {
 	if res.Body == nil {
-		return nil, fmt.Errorf("no FetchTopStoriesAPIResponse given.")
+		return nil, fmt.Errorf("no FetchTopStoriesAPIResponse given")
 	}
 
 	defer res.Body.Close()
