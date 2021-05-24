@@ -8,8 +8,8 @@ import (
 	"github.com/thorstenpfister/gonyt/nytapi"
 )
 
-var category string
-var searchTerm string
+var bookreviewsFlagCategory string
+var bookreviewsFlagSearchTerm string
 
 var bookreviewsCmd = &cobra.Command{
 	Use:   "bookreviews",
@@ -29,9 +29,9 @@ var bookreviewsCmd = &cobra.Command{
 			return
 		}
 		ctx := context.Background()
-		category := nytapi.BookReviewsCategory(category)
+		category := nytapi.BookReviewsCategory(bookreviewsFlagCategory)
 
-		bookReviews, err := client.FetchBookReviews(ctx, category, searchTerm)
+		bookReviews, err := client.FetchBookReviews(ctx, category, bookreviewsFlagSearchTerm)
 		if err != nil {
 			fmt.Println("Error calling New York Times API!", err)
 			return
@@ -44,8 +44,8 @@ var bookreviewsCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(bookreviewsCmd)
 
-	bookreviewsCmd.Flags().StringVarP(&category, "category", "c", "", "Book review category to search for.")
-	bookreviewsCmd.Flags().StringVarP(&searchTerm, "term", "t", "", "Book review term to search for.")
+	bookreviewsCmd.Flags().StringVarP(&bookreviewsFlagCategory, "category", "c", "", "Book review category to search for.")
+	bookreviewsCmd.Flags().StringVarP(&bookreviewsFlagSearchTerm, "term", "t", "", "Book review term to search for.")
 	bookreviewsCmd.MarkFlagRequired("category")
 	bookreviewsCmd.MarkFlagRequired("searchTerm")
 }
