@@ -91,20 +91,33 @@ func preferredApiKey() (*string, error) {
 }
 
 // Handles general printing based on CLI flags
-func print(articles *[]nytapi.Article, updateTime *time.Time) {
+func printArticles(articles *[]nytapi.Article, updateTime *time.Time) {
 	if flagJSONOutput {
-		err := printJSON(articles)
+		err := printJSONArticles(articles)
 		if err != nil {
 			fmt.Println("Error printing JSON!", err)
 			return
 		}
 	} else {
-		printArticles(articles, updateTime)
+		printArticlesCLI(articles, updateTime)
+	}
+}
+
+// Handles general printing based on CLI flags
+func printBookReviews(bookReviews *[]nytapi.BookReview) {
+	if flagJSONOutput {
+		err := printJSONBookReviews(bookReviews)
+		if err != nil {
+			fmt.Println("Error printing JSON!", err)
+			return
+		}
+	} else {
+		printBookReviewsCLI(bookReviews)
 	}
 }
 
 // Handles printing of articles as JSON array
-func printJSON(articles *[]nytapi.Article) error {
+func printJSONArticles(articles *[]nytapi.Article) error {
 	json, err := json.Marshal(articles)
 	if err != nil {
 		return fmt.Errorf("failed to marshal to JSON")
@@ -114,8 +127,19 @@ func printJSON(articles *[]nytapi.Article) error {
 	return nil
 }
 
+// Handles printing of book reviews as JSON array
+func printJSONBookReviews(bookReviews *[]nytapi.BookReview) error {
+	json, err := json.Marshal(bookReviews)
+	if err != nil {
+		return fmt.Errorf("failed to marshal to JSON")
+	}
+
+	fmt.Println(string(json))
+	return nil
+}
+
 // Handles opinionated printing of articles
-func printArticles(articles *[]nytapi.Article, updateTime *time.Time) {
+func printArticlesCLI(articles *[]nytapi.Article, updateTime *time.Time) {
 	fmt.Println("Last update:", updateTime)
 	fmt.Println()
 
@@ -125,5 +149,16 @@ func printArticles(articles *[]nytapi.Article, updateTime *time.Time) {
 			fmt.Println("\t", article.Abstract)
 		}
 		fmt.Println("\t", article.Url)
+	}
+}
+
+// Handles opinionated printing of book reviews
+func printBookReviewsCLI(bookReviews *[]nytapi.BookReview) {
+	for _, bookReview := range *bookReviews {
+		fmt.Println(bookReview.BookAuthor, " - ", bookReview.BookTitle)
+		if bookReview.Summary != "" {
+			fmt.Println("\t", bookReview.Summary)
+		}
+		fmt.Println("\t", bookReview.URL)
 	}
 }

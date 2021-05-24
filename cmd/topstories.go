@@ -40,7 +40,7 @@ var topstoriesCmd = &cobra.Command{
 			return
 		}
 
-		print(articles, updateTime)
+		printArticles(articles, updateTime)
 	},
 }
 
