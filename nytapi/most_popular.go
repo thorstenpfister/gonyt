@@ -31,6 +31,7 @@ const (
 	Month MostPopularPeriod = 30
 )
 
+// IsValid checks the validity of a most popular time period.
 func (period MostPopularPeriod) IsValid() error {
 	switch period {
 	case Day, Week, Month:

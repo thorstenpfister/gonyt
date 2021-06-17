@@ -23,6 +23,7 @@ type FetchMostPopularHandler struct {
 	Port  port.HTTPPort
 }
 
+// Handle handles the query for a most popular category for a given time period from the New York Times API.
 func (h *FetchMostPopularHandler) Handle(ctx context.Context) (*[]nytapi.PopularArticle, error) {
 	req, err := h.newFetchMostPopularHTTPRequest(ctx)
 	if err != nil {
