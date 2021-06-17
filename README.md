@@ -33,6 +33,8 @@ The following APIs are currently implemented in both the library and CLI. Other 
  - [ ] Times tags
  - [ ] Times wire
 
+Please note that the New York Times API does handle articles differently across some of their APIs, so please double check with your intended usage. This pertains specifically to available fields and adherence e.g. to date time ISO standards.
+
 # Getting started
 
 For any usage you will need an API key from the New York Times which you can register for via their [developer portal](https://developer.nytimes.com/).
