@@ -12,7 +12,7 @@ import (
 	"github.com/thorstenpfister/gonyt/internal/nytapi/port"
 )
 
-// FetchTopStories models a query for fetching book reviews of a specified category of the New York Times API.
+// FetchBookReviews models a query for fetching book reviews of a specified category of the New York Times API.
 type FetchBookReviews struct {
 	Category string
 	Term     string
