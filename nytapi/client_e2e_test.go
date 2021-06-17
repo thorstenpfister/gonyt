@@ -69,3 +69,16 @@ func (suite *ClientE2ETestSuite) Test_E2E_Client_ShouldHandleValid_FetchBookRevi
 		assert.NotNil(suite.T(), bookReviews)
 	}
 }
+
+func (suite *ClientE2ETestSuite) Test_E2E_Client_ShouldHandleValid_FetchMostPopularArticles_WithValues() {
+	sut := nytapi.NewClient(&suite.httpClient, suite.apiKey)
+
+	ctx := context.Background()
+	category := nytapi.Emailed
+	period := nytapi.Day
+
+	articles, err := sut.FetchMostPopularArticles(ctx, category, period)
+
+	require.Nil(suite.T(), err)
+	assert.NotNil(suite.T(), articles)
+}

@@ -24,10 +24,10 @@ The following APIs are currently implemented in both the library and CLI. Other 
  - [x] Books
    - [x] Book reviews
    - [ ] Bestseller lists
+ - [x] Most popular
  - [ ] Archive
  - [ ] Article search
  - [ ] Community
- - [ ] Most popular
  - [ ] Movie reviews
  - [ ] Semantic 
  - [ ] Times tags

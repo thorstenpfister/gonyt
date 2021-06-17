@@ -15,6 +15,9 @@ type Article = nytapi.Article
 // BookReview as delivered by the New York Times API.
 type BookReview = nytapi.BookReview
 
+// PopularArticle as delivered by the New York Times API.
+type PopularArticle = nytapi.PopularArticle
+
 // Client for querying the New York Times API.
 type Client struct {
 	port port.HTTPPort
@@ -75,4 +78,30 @@ func (c *Client) FetchBookReviews(ctx context.Context, category BookReviewsCateg
 	}
 
 	return bookReviews, nil
+}
+
+// FetchMostPopularArticles is used to fetch the most popular articles from the New York Times API.
+func (c *Client) FetchMostPopularArticles(ctx context.Context, popularCategory MostPopularCategory, period MostPopularPeriod) (*[]PopularArticle, error) {
+	if err := popularCategory.IsValid(); err != nil {
+		return nil, err
+	}
+	if err := period.IsValid(); err != nil {
+		return nil, err
+	}
+
+	fetchMostPopular := query.FetchMostPopular{
+		Category: string(popularCategory),
+		Period:   int(period),
+	}
+	handler := query.FetchMostPopularHandler{
+		Query: fetchMostPopular,
+		Port:  c.port,
+	}
+
+	articles, err := handler.Handle(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	return articles, nil
 }

@@ -1,4 +1,4 @@
-@api_key=
+@api_key=__PLEASE_PROVIDE_YOUR_OWN_KEY__
 @base_url=https://api.nytimes.com/svc
 
 ### Fetch top stories by section
@@ -14,3 +14,8 @@ https://api.nytimes.com/svc/books/v3/reviews.json?{{search_category}}={{search_t
 ### Fetch list of book reviews
 @list_category=hardcover-fiction
 https://api.nytimes.com/svc/books/v3/lists/current/{{list_category}}.json?api-key={{api_key}}
+
+### Fetch most popular
+@popular_category=emailed
+@popular_period=1
+https://api.nytimes.com/svc/mostpopular/v2/{{popular_category}}/{{popular_period}}.json?api-key={{api_key}}
