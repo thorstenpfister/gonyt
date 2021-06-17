@@ -18,4 +18,4 @@ https://api.nytimes.com/svc/books/v3/lists/current/{{list_category}}.json?api-ke
 ### Fetch most popular
 @popular_category=emailed
 @popular_period=1
-https://api.nytimes.com/svc/mostpopular/v2/{{popular_category}}/{{popular_period}}.json?api-key={{api_key}}
+https://api.nytimes.com/svc/mostpopular/v2/{{popular_category}}/{{list_category}}.json?api-key={{api_key}}

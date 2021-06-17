@@ -103,6 +103,19 @@ func printArticles(articles *[]nytapi.Article, updateTime *time.Time) {
 	}
 }
 
+// Handles general printing of popular articles based on CLI flags
+func printPopularArticles(articles *[]nytapi.PopularArticle) {
+	if flagJSONOutput {
+		err := printJSONPopularArticles(articles)
+		if err != nil {
+			fmt.Println("Error printing JSON!", err)
+			return
+		}
+	} else {
+		printPopularArticlesCLI(articles)
+	}
+}
+
 // Handles general printing based on CLI flags
 func printBookReviews(bookReviews *[]nytapi.BookReview) {
 	if flagJSONOutput {
@@ -118,6 +131,17 @@ func printBookReviews(bookReviews *[]nytapi.BookReview) {
 
 // Handles printing of articles as JSON array
 func printJSONArticles(articles *[]nytapi.Article) error {
+	json, err := json.Marshal(articles)
+	if err != nil {
+		return fmt.Errorf("failed to marshal to JSON")
+	}
+
+	fmt.Println(string(json))
+	return nil
+}
+
+// Handles printing of popular articles as JSON array
+func printJSONPopularArticles(articles *[]nytapi.PopularArticle) error {
 	json, err := json.Marshal(articles)
 	if err != nil {
 		return fmt.Errorf("failed to marshal to JSON")
@@ -149,6 +173,17 @@ func printArticlesCLI(articles *[]nytapi.Article, updateTime *time.Time) {
 			fmt.Println("\t", article.Abstract)
 		}
 		fmt.Println("\t", article.Url)
+	}
+}
+
+// Handles opinionated printing of popular articles
+func printPopularArticlesCLI(articles *[]nytapi.PopularArticle) {
+	for _, article := range *articles {
+		fmt.Println(article.Title)
+		if article.Abstract != "" {
+			fmt.Println("\t", article.Abstract)
+		}
+		fmt.Println("\t", article.URL)
 	}
 }
 
